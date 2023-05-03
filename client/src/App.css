@@ -1,0 +1,180 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  position: relative;
+  color: #222;
+  background-color: #ffffff;
+  font-size: 12px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn {
+  height: 20px;
+  width: 20px;
+}
+
+header a {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  font-size: 1.2rem;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+header a:hover {
+  cursor: pointer;
+}
+
+header a span {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.create-post {
+  width: 100%;
+  margin-top: 5vh;
+}
+
+.ql-editor p {
+  font-size: 1.2rem;
+}
+
+#logo {
+  width: 30px;
+  height: 30px;
+}
+
+.post {
+  margin: 20px 0;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1rem;
+  gap: 20px;
+}
+
+.post .img {
+  min-width: 300px;
+}
+
+.img img {
+  height: 100%;
+  width: 100%;
+}
+
+.content * {
+  font-size: 1rem;
+}
+
+.content p {
+  font-size: 1rem;
+}
+
+.content img {
+  width: 100%;
+}
+
+#to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.login-main {
+  margin-top: 50px;
+}
+.login-main h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+}
+
+form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form * {
+  border-radius: 10px;
+  border-color: #ddd;
+}
+
+form label {
+  font-size: 2rem;
+}
+
+form input {
+  font-size: 1.2rem;
+  height: 60px;
+  padding: 15px;
+}
+
+form button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #222;
+  cursor: pointer;
+  margin: 30px 0;
+  height: 60px;
+}
+
+form button:hover {
+  color: #222;
+  background-color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .post {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+  }
+  header a {
+    font-size: 1rem;
+  }
+  #to-top {
+    height: 30px;
+    width: 30px;
+    bottom: 10px;
+    right: 10px;
+  }
+  .create-new-post {
+    display: none;
+  }
+}
