@@ -15,7 +15,7 @@ const PostPage = () => {
   }, []);
 
   if (!postInfo) {
-    return 'loading...';
+    return 'loading.....';
   }
 
   return (
