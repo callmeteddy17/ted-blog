@@ -10,10 +10,12 @@ const fs = require('fs');
 const User = require('./models/User');
 const Post = require('./models/Post');
 const cookieParser = require('cookie-parser');
+const router = express.Router();
 
 require('dotenv').config();
 
 const app = express();
+
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_KEY;
 const PORT = process.env.PORT || 3001;
@@ -32,7 +34,7 @@ app.use('/upload', express.static(__dirname + '/upload'));
 
 mongoose.connect(process.env.MONGO_URL);
 
-app.post('/register', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { userName, password, email } = req.body;
   try {
     const userDoc = await User.create({
@@ -46,7 +48,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
 
@@ -72,7 +74,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/profile', (req, res) => {
+router.get('/profile', (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, (err, info) => {
     if (err) throw err;
@@ -80,7 +82,7 @@ app.get('/profile', (req, res) => {
   });
 });
 
-app.post('/post', upload.single('file'), async (req, res) => {
+router.post('/post', upload.single('file'), async (req, res) => {
   const { originalname, path } = req.file;
   const part = originalname.split('.');
   const ext = part[part.length - 1];
@@ -102,7 +104,7 @@ app.post('/post', upload.single('file'), async (req, res) => {
   });
 });
 
-app.put('/post', upload.single('file'), async (req, res) => {
+router.put('/post', upload.single('file'), async (req, res) => {
   newPath = null;
   if (req.file) {
     const { originalname, path } = req.file;
@@ -134,7 +136,7 @@ app.put('/post', upload.single('file'), async (req, res) => {
   });
 });
 
-app.get('/post', async (req, res) => {
+router.get('/post', async (req, res) => {
   const posts = await Post.find()
     .populate('creator', ['userName'])
 
@@ -143,11 +145,13 @@ app.get('/post', async (req, res) => {
   res.json(posts);
 });
 
-app.get(`/post/:id`, async (req, res) => {
+router.get(`/post/:id`, async (req, res) => {
   const { id } = req.params;
   const postInfo = await Post.findById(id).populate('creator', 'userName');
   res.json(postInfo);
 });
+
+app.use(router);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is listen on http://localhost:${PORT}`);
