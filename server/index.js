@@ -16,14 +16,14 @@ require('dotenv').config();
 const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_KEY;
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:5173',
+    origin: 'https://ted-blog.vercel.app/',
   })
 );
 app.use('/upload', express.static(__dirname + '/upload'));
