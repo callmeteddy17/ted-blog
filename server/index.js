@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: 'https://ted-blog.vercel.app/',
+    origin: '*',
   })
 );
 app.use('/upload', express.static(__dirname + '/upload'));
