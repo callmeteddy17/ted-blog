@@ -9,11 +9,14 @@ const RegisterPage = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    const respone = await fetch('http://localhost:3001/register', {
-      method: 'POST',
-      body: JSON.stringify({ userName, password, email }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const respone = await fetch(
+      `${import.meta.env.VITE_SOME_KEY_URL}/register`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ userName, password, email }),
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     if (respone.status === 200) {
       setPassword('');

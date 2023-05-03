@@ -12,13 +12,15 @@ const EditPost = () => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/post/${param.id}`).then((res) => {
-      res.json().then((post) => {
-        setTitle(post.title);
-        setSummary(post.summary);
-        setContent(post.content);
-      });
-    });
+    fetch(`${import.meta.env.VITE_SOME_KEY_URL}/post/${param.id}`).then(
+      (res) => {
+        res.json().then((post) => {
+          setTitle(post.title);
+          setSummary(post.summary);
+          setContent(post.content);
+        });
+      }
+    );
   }, []);
 
   const updatePost = async (e) => {
@@ -33,7 +35,7 @@ const EditPost = () => {
 
     e.preventDefault();
 
-    const respone = await fetch(`http://localhost:3001/post`, {
+    const respone = await fetch(`${import.meta.env.VITE_SOME_KEY_URL}/post`, {
       method: 'PUT',
       body: data,
       credentials: 'include',

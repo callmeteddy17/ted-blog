@@ -6,7 +6,7 @@ const Post = () => {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/post').then((respone) => {
+    fetch(`${import.meta.env.VITE_SOME_KEY_URL}/post`).then((respone) => {
       respone.json().then((post) => {
         setPost(post);
       });
@@ -19,7 +19,10 @@ const Post = () => {
           <div className="post" key={i}>
             <div className="img">
               <Link to={`/post/${post._id}`}>
-                <img src={`http://localhost:3001/${post.cover}`} alt="img" />
+                <img
+                  src={`${import.meta.env.VITE_SOME_KEY_URL}/${post.cover}`}
+                  alt="img"
+                />
               </Link>
             </div>
             <div className="blog-info">

@@ -5,11 +5,13 @@ const PostPage = () => {
   const [postInfo, setPostInfo] = useState(null);
   const param = useParams();
   useEffect(() => {
-    fetch(`http://localhost:3001/post/${param.id}`).then((res) => {
-      res.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
+    fetch(`${import.meta.env.VITE_SOME_KEY_URL}/post/${param.id}`).then(
+      (res) => {
+        res.json().then((postInfo) => {
+          setPostInfo(postInfo);
+        });
+      }
+    );
   }, []);
 
   if (!postInfo) {
@@ -41,7 +43,10 @@ const PostPage = () => {
       <b style={{ fontSize: '1.2rem', margin: ' 20px 0px' }}>
         {postInfo.summary}
       </b>
-      <img src={`http://localhost:3001/${postInfo.cover}`} alt="cover" />
+      <img
+        src={`${import.meta.env.VITE_SOME_KEY_URL}/${postInfo.cover}`}
+        alt="cover"
+      />
       <div
         className="content"
         dangerouslySetInnerHTML={{ __html: postInfo.content }}

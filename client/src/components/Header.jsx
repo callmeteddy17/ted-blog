@@ -11,7 +11,7 @@ const Header = () => {
   const { setUserInfo, userInfo } = useUserContext();
 
   useEffect(() => {
-    fetch('http://localhost:3001/profile', {
+    fetch(`${import.meta.env.VITE_SOME_KEY_URL}/profile`, {
       credentials: 'include',
     }).then((response) => {
       response.json().then((userInfo) => {
