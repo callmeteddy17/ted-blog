@@ -137,6 +137,7 @@ router.put('/post', upload.single('file'), async (req, res) => {
 });
 
 router.get('/post', async (req, res) => {
+  //
   const posts = await Post.find()
     .populate('creator', ['userName'])
 
