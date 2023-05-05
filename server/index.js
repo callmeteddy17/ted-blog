@@ -116,7 +116,7 @@ router.put('/post', upload.single('file'), async (req, res) => {
 
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(500).json(err);
     const { title, summary, content, id } = req.body;
 
     const postDoc = await Post.findById(id);
