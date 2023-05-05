@@ -10,6 +10,7 @@ const fs = require('fs');
 const User = require('./models/User');
 const Post = require('./models/Post');
 const cookieParser = require('cookie-parser');
+const { error } = require('console');
 const router = express.Router();
 
 require('dotenv').config();
@@ -76,8 +77,8 @@ router.post('/login', async (req, res) => {
 router.get('/profile', (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
-    res.json(info);
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(info);
   });
 });
 
