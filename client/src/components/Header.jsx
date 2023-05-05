@@ -12,7 +12,7 @@ const Header = () => {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SOME_KEY_URL}/profile`, {
-      credentials: 'include',
+      credentials: true,
     }).then((response) => {
       response.json().then((userInfo) => {
         setUserInfo(userInfo);
