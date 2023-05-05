@@ -59,11 +59,16 @@ router.post('/login', async (req, res) => {
         { email, user: userDoc.userName, id: userDoc._id },
         secret,
         (err, token) => {
-          if (err) throw err;
-          res.cookie('token', token).json({
-            id: userDoc._id,
-            user: userDoc.userName,
-          });
+          if (err) return res.status(500).json(err);
+          res
+            .cookie('token', token, {
+              httpOnly: true,
+              sameSite: 'strict',
+            })
+            .json({
+              id: userDoc._id,
+              user: userDoc.userName,
+            });
         }
       );
     } else {
