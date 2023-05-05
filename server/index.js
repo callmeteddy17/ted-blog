@@ -91,7 +91,7 @@ router.post('/post', upload.single('file'), async (req, res) => {
   fs.renameSync(path, newPath);
 
   jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(500).json(err);
     const { title, summary, content } = req.body;
     const doc = await Post.create({
       creator: info.id,
@@ -100,7 +100,7 @@ router.post('/post', upload.single('file'), async (req, res) => {
       content,
       cover: newPath,
     });
-    res.status(200).json(doc);
+    return res.status(200).json(doc);
   });
 });
 
