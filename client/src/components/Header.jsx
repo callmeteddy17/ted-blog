@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import 'cookie-store';
 
 import logo from '../assets/logo3.png';
 import top from '../assets/back-to-top.svg';
@@ -18,7 +19,11 @@ const Header = () => {
         setUserInfo(userInfo);
       });
     });
-    document.cookie = `token=${userInfo.token};Path=/;`;
+    // eslint-disable-next-line no-undef
+    CookieStore.set({
+      name: 'token',
+      value: userInfo.token,
+    }); /* = `token=${userInfo.token};Path=/;`; */
   }, []);
 
   const logout = () => {
