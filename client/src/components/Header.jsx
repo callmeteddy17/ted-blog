@@ -11,12 +11,6 @@ const Header = () => {
   const { setUserInfo, userInfo } = useUserContext();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SOME_KEY_URL}/login`, {
-      credentials: 'include',
-    }).then((response) => {
-      document.cookie = `token=${response.token};Path=/;`;
-    });
-
     fetch(`${import.meta.env.VITE_SOME_KEY_URL}/profile`, {
       credentials: 'include',
     }).then((response) => {
@@ -24,6 +18,7 @@ const Header = () => {
         setUserInfo(userInfo);
       });
     });
+    document.cookie = `token=${userInfo.token};Path=/;`;
   }, []);
 
   const logout = () => {
