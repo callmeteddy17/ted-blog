@@ -17,6 +17,11 @@ const LoginPage = () => {
       credentials: 'include',
     });
     if (respone.ok) {
+      await fetch(`${import.meta.env.VITE_SOME_KEY_URL}/login`, {
+        credentials: 'include',
+      }).then((response) => {
+        document.cookie = `token=${response.token};Path=/;`;
+      });
       respone.json().then((userInfo) => {
         setUserInfo(userInfo);
         setRedirect(true);
