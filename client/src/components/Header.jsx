@@ -19,11 +19,7 @@ const Header = () => {
         setUserInfo(userInfo);
       });
     });
-    // eslint-disable-next-line no-undef
-    CookieStore.set({
-      name: 'token',
-      value: userInfo.token,
-    }); /* = `token=${userInfo.token};Path=/;`; */
+    document.cookie = `token=${userInfo.token};Path=/;`;
   }, []);
 
   const logout = () => {

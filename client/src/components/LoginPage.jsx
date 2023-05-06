@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useUserContext } from './UserContext';
-import 'cookie-store';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -19,13 +18,7 @@ const LoginPage = () => {
     });
     if (respone.ok) {
       respone.json().then((userInfo) => {
-        // eslint-disable-next-line no-undef
-        CookieStore.set({
-          name: 'token',
-          value: userInfo.token,
-        });
-
-        // document.cookie = `token=${userInfo.token};Path=/;`;
+        document.cookie = `token=${userInfo.token};Path=/;`;
         setUserInfo(userInfo);
         setRedirect(true);
       });
